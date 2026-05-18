@@ -1,7 +1,7 @@
 # Software Verification and Validation Assignment
 
 **University:** Lahore Garrison University  
-**Department:** Computer Sciences  
+**Department:** BSSE  
 **Course:** Software Verification and Validation  
 **Course Code:** SEE6603  
 
