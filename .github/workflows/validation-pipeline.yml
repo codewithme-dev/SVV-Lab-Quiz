@@ -1,0 +1,41 @@
+name: Validation Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run validation tests
+        run: |
+          pytest tests/ --html=reports/validation_report.html --self-contained-html
+
+      - name: Create evidence directory
+        run: |
+          mkdir -p evidence/artifacts
+          cp -r reports evidence/
+
+      - name: Upload validation evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: validation-evidence
+          path: evidence/

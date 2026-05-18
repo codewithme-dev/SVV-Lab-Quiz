@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>OWASP ZAP Scan Report</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 40px; color: #222; }
+    h1, h2 { color: #111; }
+    table { border-collapse: collapse; width: 100%; margin-top: 16px; }
+    th, td { border: 1px solid #999; padding: 8px; text-align: left; }
+    th { background: #f1f1f1; }
+  </style>
+</head>
+<body>
+  <h1>OWASP ZAP Scan Report</h1>
+  <p>Target: Demo web application</p>
+  <p>Scan Type: Passive and Active</p>
+
+  <h2>Summary</h2>
+  <table>
+    <tr><th>Severity</th><th>Count</th></tr>
+    <tr><td>High</td><td>2</td></tr>
+    <tr><td>Medium</td><td>1</td></tr>
+    <tr><td>Low</td><td>1</td></tr>
+  </table>
+
+  <h2>Findings</h2>
+  <table>
+    <tr>
+      <th>ID</th><th>Vulnerability</th><th>Component</th><th>Severity</th><th>Evidence</th><th>Mitigation</th>
+    </tr>
+    <tr>
+      <td>V-01</td><td>SQL Injection</td><td>Login form</td><td>High</td><td>Database error on payload</td><td>Parameterized queries</td>
+    </tr>
+    <tr>
+      <td>V-02</td><td>XSS</td><td>Search field</td><td>High</td><td>Script reflected in response</td><td>Output encoding</td>
+    </tr>
+    <tr>
+      <td>V-03</td><td>Missing Security Headers</td><td>HTTP headers</td><td>Medium</td><td>CSP/HSTS absent</td><td>Add security headers</td>
+    </tr>
+  </table>
+</body>
+</html>
