@@ -24,17 +24,27 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+          pip install pytest pytest-html
+
+      # ✅ CRITICAL FIX: Make src/ visible to Python
+      - name: Set PYTHONPATH
+        run: echo "PYTHONPATH=$GITHUB_WORKSPACE" >> $GITHUB_ENV
+
+      - name: Create reports directory
+        run: mkdir -p reports
 
       - name: Run validation tests
         run: |
           pytest tests/ --html=reports/validation_report.html --self-contained-html
 
       - name: Create evidence directory
+        if: always()
         run: |
           mkdir -p evidence/artifacts
           cp -r reports evidence/
 
       - name: Upload validation evidence
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: validation-evidence
